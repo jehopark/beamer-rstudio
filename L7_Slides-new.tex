@@ -1,0 +1,791 @@
+\documentclass[ignorenonframetext,]{beamer}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+\ifxetex
+\usepackage{mathspec}
+\else
+\usepackage{fontspec}
+\fi
+\defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+\usecolortheme{albatross}
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\newif\ifbibliography
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{{#1}}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{{#1}}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
+\newcommand{\ImportTok}[1]{{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{{#1}}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{{#1}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{{#1}}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{{#1}}}}
+\newcommand{\BuiltInTok}[1]{{#1}}
+\newcommand{\ExtensionTok}[1]{{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{{#1}}}
+\newcommand{\RegionMarkerTok}[1]{{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\NormalTok}[1]{{#1}}
+
+% Prevent slide breaks in the middle of a paragraph:
+\widowpenalties 1 10000
+\raggedbottom
+
+\AtBeginPart{
+\let\insertpartnumber\relax
+\let\partname\relax
+\frame{\partpage}
+}
+\AtBeginSection{
+\ifbibliography
+\else
+\let\insertsectionnumber\relax
+\let\sectionname\relax
+\frame{\sectionpage}
+\fi
+}
+\AtBeginSubsection{
+\let\insertsubsectionnumber\relax
+\let\subsectionname\relax
+\frame{\subsectionpage}
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+
+\title{Lecture 7 Graphical Data Analysis}
+\author{The Great Courses}
+\date{}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{Today's topic: Graphical Data analysis}
+
+Statistical graphs are useful in helping us visualize data. Through
+graphs, we:
+
+\begin{itemize}
+\tightlist
+\item
+  Understand data properties
+\item
+  Find patterns in data
+\item
+  Suggest modeling strategies
+\item
+  ``Debug'' our analyses
+\item
+  Communicate results
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Learning Objectives for today}
+
+\begin{itemize}
+\item
+  Define and identify basic numerical and graphical summeries of data
+\item
+  Use R for calculating descriptive statistics, making graphs, and
+  writing functions
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Iris Data}
+
+The Iris dataset is widely used throughout statistical science for
+illustrating various problems in statistical graphics, multivariate
+statistics and machine learning.
+
+\begin{itemize}
+\item
+  It's a small, but non-trivial dataset.
+\item
+  The data values are real (as opposed to simulated) and are of high
+  quality (collected with minimal error).
+\item
+  The data were used by the celebrated British statistician Ronald
+  Fisher in 1936. (Later he was knighted and became Sir Ronald.)
+\item
+  Using a few famous datasets is one of the traditions we hand down in
+  statistics! (Also, when comparing old and new methods, or in
+  evaluating any method, it's helpful to try them out on known datasets,
+  thus maintaining continuity in how we assess methods.)
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Iris Data}
+
+The Iris dataset is most commonly used for on pattern recognition in
+statistics. The dataset contains 3 classes of 50 instances each, where
+each class refers to a type of iris plant, with the following
+attributes:
+
+\begin{itemize}
+\tightlist
+\item
+  Sepal Length
+\item
+  Sepal Width
+\item
+  Petal Length\\
+\item
+  Petal Width
+\item
+  class: Iris setosa, Iris versicolor, Iris virginica
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Load Data}
+
+The Iris data is in the \texttt{datasets} library in R. Type the
+following commands:
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(datasets)}
+\KeywordTok{library}\NormalTok{(RColorBrewer)}
+\KeywordTok{attach}\NormalTok{(iris)}
+\KeywordTok{head}\NormalTok{(iris)}
+  \NormalTok{Sepal.Length Sepal.Width Petal.Length Petal.Width Species}
+\DecValTok{1}          \FloatTok{5.1}         \FloatTok{3.5}          \FloatTok{1.4}         \FloatTok{0.2}  \NormalTok{setosa}
+\DecValTok{2}          \FloatTok{4.9}         \FloatTok{3.0}          \FloatTok{1.4}         \FloatTok{0.2}  \NormalTok{setosa}
+\DecValTok{3}          \FloatTok{4.7}         \FloatTok{3.2}          \FloatTok{1.3}         \FloatTok{0.2}  \NormalTok{setosa}
+\DecValTok{4}          \FloatTok{4.6}         \FloatTok{3.1}          \FloatTok{1.5}         \FloatTok{0.2}  \NormalTok{setosa}
+\DecValTok{5}          \FloatTok{5.0}         \FloatTok{3.6}          \FloatTok{1.4}         \FloatTok{0.2}  \NormalTok{setosa}
+\DecValTok{6}          \FloatTok{5.4}         \FloatTok{3.9}          \FloatTok{1.7}         \FloatTok{0.4}  \NormalTok{setosa}
+\end{Highlighting}
+\end{Shaded}
+
+\end{frame}
+
+\begin{frame}{Bar Plots}
+
+Let's begin our analysis.
+
+\begin{itemize}
+\item
+  \textbf{Bar Plots} are useful for showing comparisons across several
+  groups. Although it looks like a histogram, a bar plot is plotted over
+  a label that represents a category (e.g., Iris type).
+\item
+  One indication of the difference between a bar plot and histogram:
+  It's always appropriate to talk about the skewness of a histogram;
+  that is, the tendency of the observations to fall more on the low end
+  or the high end of the X axis.
+\item
+  However, on bar plots, the X axis can sometimes be categorical -
+  (i.e.~not quantitative.)
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Bar Plots}
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{barplot}\NormalTok{(iris$Petal.Length, }\DataTypeTok{main =} \StringTok{"Petal Length"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=2.5\linewidth]{L7_Slides-new_files/figure-beamer/unnamed-chunk-2-1} \end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]{Bar Plot}
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{barplot}\NormalTok{(iris$Sepal.Length, }
+        \DataTypeTok{col=} \KeywordTok{brewer.pal}\NormalTok{(}\DecValTok{3}\NormalTok{,}\StringTok{"Set1"}\NormalTok{), }\DataTypeTok{main =} \StringTok{"Sepal Length"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=2.5\linewidth]{L7_Slides-new_files/figure-beamer/unnamed-chunk-3-1} \end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]{Bar Plot}
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{barplot}\NormalTok{(}\KeywordTok{table}\NormalTok{(iris$Species,iris$Sepal.Length), }
+        \DataTypeTok{col  =} \KeywordTok{brewer.pal}\NormalTok{(}\DecValTok{3}\NormalTok{,}\StringTok{"Set1"}\NormalTok{), }
+        \DataTypeTok{main =} \StringTok{"Stacked Plot of Sepal Length by Species"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{L7_Slides-new_files/figure-beamer/unnamed-chunk-4-1} \end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]{Summary Statistics}
+
+The \texttt{summary} function is a quick and easy way to assess the
+statistical properties of each attribute. These values are displayed
+graphically in a box plot.
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(iris)}
+  \NormalTok{Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   }
+ \NormalTok{Min.   :}\FloatTok{4.300}   \NormalTok{Min.   :}\FloatTok{2.000}   \NormalTok{Min.   :}\FloatTok{1.000}   \NormalTok{Min.   :}\FloatTok{0.100}  
+ \NormalTok{1st Qu.:}\FloatTok{5.100}   \NormalTok{1st Qu.:}\FloatTok{2.800}   \NormalTok{1st Qu.:}\FloatTok{1.600}   \NormalTok{1st Qu.:}\FloatTok{0.300}  
+ \NormalTok{Median :}\FloatTok{5.800}   \NormalTok{Median :}\FloatTok{3.000}   \NormalTok{Median :}\FloatTok{4.350}   \NormalTok{Median :}\FloatTok{1.300}  
+ \NormalTok{Mean   :}\FloatTok{5.843}   \NormalTok{Mean   :}\FloatTok{3.057}   \NormalTok{Mean   :}\FloatTok{3.758}   \NormalTok{Mean   :}\FloatTok{1.199}  
+ \NormalTok{3rd Qu.:}\FloatTok{6.400}   \NormalTok{3rd Qu.:}\FloatTok{3.300}   \NormalTok{3rd Qu.:}\FloatTok{5.100}   \NormalTok{3rd Qu.:}\FloatTok{1.800}  
+ \NormalTok{Max.   :}\FloatTok{7.900}   \NormalTok{Max.   :}\FloatTok{4.400}   \NormalTok{Max.   :}\FloatTok{6.900}   \NormalTok{Max.   :}\FloatTok{2.500}  
+       \NormalTok{Species  }
+ \NormalTok{setosa    :}\DecValTok{50}  
+ \NormalTok{versicolor:}\DecValTok{50}  
+ \NormalTok{virginica :}\DecValTok{50}  
+                
+                
+                
+\end{Highlighting}
+\end{Shaded}
+
+\end{frame}
+
+\begin{frame}[fragile]{Box Plots}
+
+\begin{itemize}
+\item
+  Box plots are used to compactly show many pieces of information about
+  a variables distribution and is useful for visualizing the spread of
+  the data.
+\item
+  Box plots show \textbf{five statistically important numbers} - the
+  minimum, the 25th percentile, the median, the 75th percentile and the
+  maximum.
+\end{itemize}
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{boxplot}\NormalTok{(iris$Sepal.Length, }\DataTypeTok{main =} \StringTok{"Sepal Length"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.8\linewidth]{L7_Slides-new_files/figure-beamer/unnamed-chunk-6-1} \end{center}
+
+\vfill
+
+\end{frame}
+
+\begin{frame}[fragile]{Box Plots}
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{boxplot}\NormalTok{(iris[,}\DecValTok{1}\NormalTok{:}\DecValTok{4}\NormalTok{], }
+        \DataTypeTok{names=}\KeywordTok{c}\NormalTok{(}\StringTok{"Sep L"}\NormalTok{, }\StringTok{"Sep W"}\NormalTok{, }\StringTok{"Pet L"}\NormalTok{, }\StringTok{"Pet W"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=2\linewidth]{L7_Slides-new_files/figure-beamer/boxplot1-1} \end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]{Box Plots}
+
+A box plot can also be used to show how one attribute
+\texttt{petal.length} varies with another attribute \texttt{iris.type}.
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{boxplot}\NormalTok{(iris$Petal.Length~iris$Species, }
+        \DataTypeTok{main =} \StringTok{"Petal Length vs. Species"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=1\linewidth]{L7_Slides-new_files/figure-beamer/unnamed-chunk-7-1} \end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]{Box Plot}
+
+We can visualize how the spread of \texttt{Sepal\ Length} changes across
+various categories of \texttt{Species}. A color palette is a group of
+colors that is used to make the graph more appealing and help create
+visual distinctions in the data.
+
+\end{frame}
+
+\begin{frame}[fragile]{Box Plot}
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{boxplot}\NormalTok{(iris$Sepal.Length~iris$Species,}
+        \DataTypeTok{col=}\KeywordTok{heat.colors}\NormalTok{(}\DecValTok{3}\NormalTok{), }
+        \DataTypeTok{main =} \StringTok{"Sepal Length vs. Species"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{L7_Slides-new_files/figure-beamer/unnamed-chunk-8-1} \end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]{Scatter Plot}
+
+Scatter plots help in visualizing data easily and for simple data
+inspection. Try the following code.
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(iris$Petal.Length, }\DataTypeTok{main=}\StringTok{"Petal Length"}\NormalTok{, }
+     \DataTypeTok{ylab =} \StringTok{"Petal Length"}\NormalTok{, }\DataTypeTok{xlab =} \StringTok{"Species"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{L7_Slides-new_files/figure-beamer/unnamed-chunk-9-1} \end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]{Scatter Plot}
+
+Let's generate corresponding scatterplots for Petal.Width, Sepal.Length
+and Sepal.Width.
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(iris$Petal.Length, }\DataTypeTok{main=}\StringTok{"Petal Length"}\NormalTok{) }
+\KeywordTok{plot}\NormalTok{(iris$Sepal.Length, }\DataTypeTok{main=}\StringTok{"Sepal Length"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{L7_Slides-new_files/figure-beamer/unnamed-chunk-10-1} \end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]{Scatter Plot}
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(iris$Petal.Width, }\DataTypeTok{main=}\StringTok{"Petal Width"}\NormalTok{) }
+\KeywordTok{plot}\NormalTok{(iris$Sepal.Width, }\DataTypeTok{main=}\StringTok{"Sepal Width"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{L7_Slides-new_files/figure-beamer/unnamed-chunk-11-1} \end{center}
+
+What are our observations? Which plots help us distinguish between
+groups?
+
+\end{frame}
+
+\begin{frame}{Scatter Plots}
+
+\begin{itemize}
+\item
+  Scatter plots are used to plot two variables against each other. We
+  can add a third dimension by coloring the data values according to
+  their Species.
+\item
+  For datasets with only a few attributes, we can construct and view all
+  the pairwise scatter plots.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Pairwise Plots}
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{pairs}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(iris[,-}\DecValTok{5}\NormalTok{]), }\DataTypeTok{pch=}\DecValTok{21}\NormalTok{, }\DataTypeTok{bg=}\KeywordTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"blue"}\NormalTok{, }\StringTok{"green"}\NormalTok{)[}\KeywordTok{unclass}\NormalTok{(iris$Species)])}
+\end{Highlighting}
+\end{Shaded}
+
+\end{frame}
+
+\begin{frame}{Pairwise Plots}
+
+\small
+
+\begin{center}\includegraphics[width=1\linewidth]{L7_Slides-new_files/figure-beamer/unnamed-chunk-13-1} \end{center}
+
+\end{frame}
+
+\begin{frame}{Pairwise Plots}
+
+\begin{itemize}
+\item
+  Since the upper and lower graphs are duplicates of each other, we can
+  augment our code to display the \textbf{correlation} between our
+  variables in the upper level.
+\item
+  The correlation measures the strength of the relationship between two
+  random variables.
+\item
+  Correlations range from -1 to 1, where:
+\end{itemize}
+
+-- Values near 1 indicate a strong positive relationship
+
+-- Values near -1 indicate a strong negative relationship
+
+-- Values near 0 indicate no relationship.
+
+\end{frame}
+
+\begin{frame}[fragile]{Pairwise Plots}
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{panel.pearson <-}\StringTok{ }\NormalTok{function(x, y, ...) \{}
+  \NormalTok{horizontal <-}\StringTok{ }\NormalTok{(}\KeywordTok{par}\NormalTok{(}\StringTok{"usr"}\NormalTok{)[}\DecValTok{1}\NormalTok{] +}\StringTok{ }\KeywordTok{par}\NormalTok{(}\StringTok{"usr"}\NormalTok{)[}\DecValTok{2}\NormalTok{]) /}\StringTok{ }\DecValTok{2}\NormalTok{;}
+  \NormalTok{vertical <-}\StringTok{ }\NormalTok{(}\KeywordTok{par}\NormalTok{(}\StringTok{"usr"}\NormalTok{)[}\DecValTok{3}\NormalTok{] +}\StringTok{ }\KeywordTok{par}\NormalTok{(}\StringTok{"usr"}\NormalTok{)[}\DecValTok{4}\NormalTok{]) /}\StringTok{ }\DecValTok{2}\NormalTok{;}
+  \KeywordTok{text}\NormalTok{(horizontal, vertical, }\KeywordTok{format}\NormalTok{(}\KeywordTok{abs}\NormalTok{(}\KeywordTok{cor}\NormalTok{(x,y)), }\DataTypeTok{digits=}\DecValTok{2}\NormalTok{))\}}
+
+\KeywordTok{pairs}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(iris[}\DecValTok{1}\NormalTok{:}\DecValTok{4}\NormalTok{]), }\DataTypeTok{main =} \StringTok{"Iris Data"}\NormalTok{, }\DataTypeTok{pch =} \DecValTok{21}\NormalTok{, }
+      \DataTypeTok{bg =} \KeywordTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{,}\StringTok{"blue"}\NormalTok{, }\StringTok{"green"}\NormalTok{)[}\KeywordTok{unclass}\NormalTok{(iris$Species)],}
+      \DataTypeTok{upper.panel=}\NormalTok{panel.pearson)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{frame}
+
+\begin{frame}{Pairwise Plots}
+
+\small
+
+\begin{center}\includegraphics[width=1\linewidth]{L7_Slides-new_files/figure-beamer/unnamed-chunk-15-1} \end{center}
+
+\end{frame}
+
+\begin{frame}{Histograms}
+
+\begin{itemize}
+\item
+  A \textbf{Histogram} is a plot that breaks the data into bins (or
+  breaks) and shows the frequency distribution of those bins.
+\item
+  We can change the breaks to see the effect it has data visualization.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Histograms}
+
+Let's create some histograms of our Iris data. The number of bins in the
+histogram is variable.
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{hist}\NormalTok{(iris$Petal.Width, }\DataTypeTok{breaks=}\DecValTok{13}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{L7_Slides-new_files/figure-beamer/unnamed-chunk-16-1} \end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]{Histograms}
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{hist}\NormalTok{(iris$Petal.Width, }\DataTypeTok{breaks=}\DecValTok{25}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{L7_Slides-new_files/figure-beamer/unnamed-chunk-17-1} \end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]{Histograms}
+
+We can create custom break points by defining a sequence vector,
+\texttt{b}, that ranges from \texttt{min(iris\$Petal.Width)} to the
+\texttt{max(iris\$Petal.Width)} with a specified number of breaks.
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{b <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\KeywordTok{min}\NormalTok{(iris$Petal.Width), }
+         \KeywordTok{max}\NormalTok{(iris$Petal.Width), }\DataTypeTok{length=}\DecValTok{11}\NormalTok{)}
+\NormalTok{b}
+\KeywordTok{hist}\NormalTok{(iris$Petal.Width, }\DataTypeTok{breaks=}\NormalTok{b, }
+     \DataTypeTok{xlab=}\StringTok{"Petal Width"}\NormalTok{, }\DataTypeTok{main=}\StringTok{"Histogram of Petal Width"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{frame}
+
+\begin{frame}{Histograms}
+
+\small
+
+\begin{center}\includegraphics[width=0.65\linewidth]{L7_Slides-new_files/figure-beamer/unnamed-chunk-19-1} \end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]{Density Plots}
+
+Density plots can be viewed as smoothed versions of a histogram. We can
+estimate the density using R's \texttt{density} function
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dens.pw =}\StringTok{ }\KeywordTok{density}\NormalTok{(iris$Petal.Width)}
+\KeywordTok{plot}\NormalTok{(dens.pw, }\DataTypeTok{ylab =} \StringTok{"Frequency"}\NormalTok{, }\DataTypeTok{xlab =} \StringTok{"Width"}\NormalTok{, }
+     \DataTypeTok{main=} \StringTok{"Petal Width Density"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{L7_Slides-new_files/figure-beamer/unnamed-chunk-20-1} \end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]{Density Plots}
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dens.pl =}\StringTok{ }\KeywordTok{density}\NormalTok{(iris$Petal.Length)}
+\KeywordTok{plot}\NormalTok{(dens.pl, }\DataTypeTok{ylab =} \StringTok{"Frequency"}\NormalTok{, }\DataTypeTok{xlab =} \StringTok{"Length"}\NormalTok{, }
+     \DataTypeTok{main=} \StringTok{"Petal Length Density"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{L7_Slides-new_files/figure-beamer/unnamed-chunk-21-1} \end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]{Density Plots}
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dens.sw =}\StringTok{ }\KeywordTok{density}\NormalTok{(iris$Sepal.Width)}
+\KeywordTok{plot}\NormalTok{(dens.sw, }\DataTypeTok{ylab =} \StringTok{"Frequency"}\NormalTok{, }\DataTypeTok{xlab =} \StringTok{"Width"}\NormalTok{, }
+     \DataTypeTok{main=} \StringTok{"Sepal Width Density"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{L7_Slides-new_files/figure-beamer/unnamed-chunk-22-1} \end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]{Density Plots}
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dens.sl =}\StringTok{ }\KeywordTok{density}\NormalTok{(iris$Sepal.Length)}
+\KeywordTok{plot}\NormalTok{(dens.sl, }\DataTypeTok{ylab =} \StringTok{"Frequency"}\NormalTok{, }\DataTypeTok{xlab =} \StringTok{"Length"}\NormalTok{, }
+     \DataTypeTok{main=} \StringTok{"Sepal Length Density"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{L7_Slides-new_files/figure-beamer/unnamed-chunk-23-1} \end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]{Density Plots}
+
+Let's also look at the density function of \texttt{Petal.Length} for
+each of the three classes of irises.
+
+\small
+
+\small
+
+\end{frame}
+
+\begin{frame}{Density Plots}
+
+\small
+
+\begin{center}\includegraphics[width=1\linewidth]{L7_Slides-new_files/figure-beamer/unnamed-chunk-26-1} \end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]{Quantile Plots}
+
+We can calculate the quantiles of the iris dataset to compare them to
+those of a normal distribution.
+
+\small
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{qqnorm}\NormalTok{(quantile.virginica, }\DataTypeTok{main=}\StringTok{"Virginica"}\NormalTok{)}
+\KeywordTok{qqline}\NormalTok{(quantile.virginica)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{L7_Slides-new_files/figure-beamer/unnamed-chunk-28-1} \end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]{Quantile Plots}
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{qqnorm}\NormalTok{(quantile.versicolor, }\DataTypeTok{main=}\StringTok{"Versicolor"}\NormalTok{)}
+\KeywordTok{qqline}\NormalTok{(quantile.versicolor)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{L7_Slides-new_files/figure-beamer/unnamed-chunk-29-1} \end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]{Quantile Plots}
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{qqnorm}\NormalTok{(quantile.setosa, }\DataTypeTok{main=}\StringTok{"Setosa"}\NormalTok{)}
+\KeywordTok{qqline}\NormalTok{(quantile.setosa)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{L7_Slides-new_files/figure-beamer/unnamed-chunk-30-1} \end{center}
+
+\end{frame}
+
+\begin{frame}{Contour Plots}
+
+Density estimation is available for higher dimensional data using
+Contour plots.
+
+\begin{itemize}
+\item
+  A \textbf{contour plot} is a graph that explores the potential
+  relationship among three variables.
+\item
+  Contour plots display the 3-dimensional relationship in two
+  dimensions, with x and y variables plotted on the x and y scales and
+  the z variable represented by contours.
+\item
+  A contour plot is like a topographical map in which x, y, and z values
+  are plotted instead of longitude, latitude, and elevation.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Contour Plots}
+
+\small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(MASS)}
+\NormalTok{petal.dens =}\StringTok{ }\KeywordTok{kde2d}\NormalTok{(iris$Petal.Length, iris$Petal.Width)}
+\KeywordTok{contour}\NormalTok{(petal.dens)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{L7_Slides-new_files/figure-beamer/unnamed-chunk-31-1} \end{center}
+
+\end{frame}
+
+\begin{frame}[fragile]{Contour Plots}
+
+The plot may also be viewed as a heatmap, with brighter colors denoting
+higher values. \small
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{image}\NormalTok{(petal.dens)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{L7_Slides-new_files/figure-beamer/unnamed-chunk-32-1} \end{center}
+
+\end{frame}
+
+\end{document}
