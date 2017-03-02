@@ -24,6 +24,20 @@ knitr::opts_chunk$set(echo=TRUE)
 knitr::opts_chunk$set(fig.align='center')
 knitr::opts_chunk$set(comment="")
 knitr::opts_chunk$set(collapse = TRUE)
+
+# use of knit_hooks$set for par option to be applied to all the chunks
+knitr::knit_hooks$set(mylightplot = function(before, options, envir) {
+    if (before) 
+      par(col="gray",      # color of lines
+          col.axis="gray", # color of axis annotation
+          col.lab="gray",  # color of x and y labels
+          col.main="gray", # color of the main title
+          col.sub="gray",  # color of the subtitles
+          col.ticks="gray",# color of tick marks
+          fg="lightgray")  # color of axes, boxes
+})
+knitr::opts_chunk$set(mylightplot=TRUE)
+
 ```
 
 ## Today's topic: Graphical Data analysis
@@ -94,18 +108,18 @@ Let's begin our analysis.
 - However, on bar plots, the X axis can sometimes be categorical - (i.e. not quantitative.) 
 
 ## Bar Plots
-```{r, out.width='100%'}
+```{r barplot1}
 barplot(iris$Petal.Length, main = "Petal Length") 
 ```
 
 ## Bar Plot
-```{r, out.width='250%'}
+```{r barplot2}
 barplot(iris$Sepal.Length, 
         col= brewer.pal(3,"Set1"), main = "Sepal Length")
 ```
 
 ## Bar Plot
-```{r, out.width='100%'}
+```{r barplot3}
 barplot(table(iris$Species,iris$Sepal.Length), 
         col  = brewer.pal(3,"Set1"), 
         main = "Stacked Plot of Sepal Length by Species")
@@ -123,14 +137,14 @@ summary(iris)
 
 - Box plots show **five statistically important numbers** - the minimum, the 25th percentile, the median, the 75th percentile and the maximum. 
 
-```{r, out.width='80%'}
+```{r}
 boxplot(iris$Sepal.Length, main = "Sepal Length")
 ```
 
 \vfill
 
 ## Box Plots
-```{r boxplot1, out.width='200%'}
+```{r boxplot1}
 boxplot(iris[,1:4], 
         names=c("Sep L", "Sep W", "Pet L", "Pet W"))
 ```
@@ -138,7 +152,7 @@ boxplot(iris[,1:4],
 ## Box Plots
 A box plot can also be used to show how one attribute `petal.length` varies with another attribute `iris.type`.
 
-```{r, out.width='100%'}
+```{r}
 boxplot(iris$Petal.Length~iris$Species, 
         main = "Petal Length vs. Species") 
 ```
