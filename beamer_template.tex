@@ -109,18 +109,27 @@ $endif$
 \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
 % Add ',fontsize=\small' for more characters per line
 \usepackage{framed}
-\definecolor{shadecolor}{RGB}{248,248,248}
+
+% change shadecolor to match with albatross Beamer theme
+\colorlet{beamerbgcolor}{blue!50!black}
+\definecolor{shadecolor}{named}{beamerbgcolor}
+%\definecolor{shadecolor}{RGB}{248,248,248} % old
+
+\definecolor{numbercolor}{rgb}{1.0, 0.75, 0.0}
+
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-% change KeywordTok for R command highlight
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0,0,0}{\textbf{{#1}}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{{#1}}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+% 
+\newcommand{\KeywordTok}[1]{\textcolor{white}{\textbf{{#1}}}}
+\newcommand{\NormalTok}[1]{\textcolor{yellow}{{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor{yellow}{{#1}}}
+\newcommand{\DecValTok}[1]{\textcolor{numbercolor}{{#1}}}
+\newcommand{\BaseNTok}[1]{\textcolor{numbercolor}{{#1}}}
+\newcommand{\FloatTok}[1]{\textcolor{numbercolor}{{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor{numbercolor}{{#1}}}
+\newcommand{\StringTok}[1]{\textcolor{yellow}{{#1}}}
+
 \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
 \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
 \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
 \newcommand{\ImportTok}[1]{{#1}}
@@ -142,8 +151,7 @@ $endif$
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
 \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{{#1}}}
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{{#1}}}}
-% change KeywordTok for R command highlight
-\newcommand{\NormalTok}[1]{\textcolor[rgb]{0,0,0}{{#1}}}
+
 %% End of highlighting-macros %%
 
 $if(tables)$
