@@ -8,15 +8,15 @@
 \usepackage{ifxetex,ifluatex}
 \usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
 \else % if luatex or xelatex
-\ifxetex
-\usepackage{mathspec}
-\else
-\usepackage{fontspec}
-\fi
-\defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 \fi
 \usecolortheme{albatross}
 % use upquote if available, for straight quotes in verbatim environments
@@ -27,24 +27,36 @@
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
 \newif\ifbibliography
-\usepackage{color}
+
+%% highlighting-macros %%
+\usepackage{color} 
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
 \newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
 \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
 % Add ',fontsize=\small' for more characters per line
 \usepackage{framed}
-\definecolor{shadecolor}{RGB}{248,248,248}
+
+% change shadecolor to match with albatross Beamer theme
+\colorlet{beamerbgcolor}{blue!50!black}
+\definecolor{shadecolor}{named}{beamerbgcolor}
+%\definecolor{shadecolor}{RGB}{248,248,248} % old
+
+\definecolor{numbercolor}{rgb}{1.0, 0.75, 0.0}
+
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{{#1}}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{{#1}}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{{#1}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
+% 
+\newcommand{\KeywordTok}[1]{\textcolor{white}{\textbf{{#1}}}}
+\newcommand{\NormalTok}[1]{\textcolor{yellow}{{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor{yellow}{{#1}}}
+\newcommand{\DecValTok}[1]{\textcolor{numbercolor}{{#1}}}
+\newcommand{\BaseNTok}[1]{\textcolor{numbercolor}{{#1}}}
+\newcommand{\FloatTok}[1]{\textcolor{numbercolor}{{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor{numbercolor}{{#1}}}
+\newcommand{\StringTok}[1]{\textcolor{yellow}{{#1}}}
+
 \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
 \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{{#1}}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
 \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{{#1}}}
 \newcommand{\ImportTok}[1]{{#1}}
@@ -66,36 +78,36 @@
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{{#1}}}}}
 \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{{#1}}}
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{{#1}}}}
-\newcommand{\NormalTok}[1]{{#1}}
+
+%% End of highlighting-macros %%
+
 
 % Prevent slide breaks in the middle of a paragraph:
 \widowpenalties 1 10000
 \raggedbottom
 
 \AtBeginPart{
-\let\insertpartnumber\relax
-\let\partname\relax
-\frame{\partpage}
+  \let\insertpartnumber\relax
+  \let\partname\relax
+  \frame{\partpage}
 }
 \AtBeginSection{
-\ifbibliography
-\else
-\let\insertsectionnumber\relax
-\let\sectionname\relax
-\frame{\sectionpage}
-\fi
+  \ifbibliography
+  \else
+    \let\insertsectionnumber\relax
+    \let\sectionname\relax
+    \frame{\sectionpage}
+  \fi
 }
 \AtBeginSubsection{
-\let\insertsubsectionnumber\relax
-\let\subsectionname\relax
-\frame{\subsectionpage}
+  \let\insertsubsectionnumber\relax
+  \let\subsectionname\relax
+  \frame{\subsectionpage}
 }
 
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
-\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{0}
 
 \title{Lecture 7 Graphical Data Analysis}
@@ -241,7 +253,7 @@ Let's begin our analysis.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=2.5\linewidth]{L7_Slides-new_files/figure-beamer/unnamed-chunk-2-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{L7_Slides-new_files/figure-beamer/unnamed-chunk-2-1} \end{center}
 
 \end{frame}
 

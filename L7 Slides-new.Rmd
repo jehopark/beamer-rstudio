@@ -94,7 +94,7 @@ Let's begin our analysis.
 - However, on bar plots, the X axis can sometimes be categorical - (i.e. not quantitative.) 
 
 ## Bar Plots
-```{r, out.width='250%'}
+```{r, out.width='100%'}
 barplot(iris$Petal.Length, main = "Petal Length") 
 ```
 
