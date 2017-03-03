@@ -50,6 +50,8 @@ $endif$
 $if(colortheme)$
 \usecolortheme{$colortheme$}
 $endif$
+%\definecolor{mycolortheme}{RGB}{0,0,0}
+%\usecolortheme[named=mycolortheme]{structure}
 $if(fonttheme)$
 \usefonttheme{$fonttheme$}
 $endif$
@@ -101,6 +103,11 @@ $if(lhs)$
 \lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\ttfamily}}{}
 $endif$
 
+% define a darkgray color, named mydarkgray
+\definecolor{mydarkgray}{RGB}{64, 64, 64}
+% set beamer's background canvas color to mydarkgray
+\setbeamercolor{background canvas}{bg=mydarkgray}
+
 %% highlighting-macros %%
 \usepackage{color} 
 \usepackage{fancyvrb}
@@ -111,8 +118,8 @@ $endif$
 \usepackage{framed}
 
 % change shadecolor to match with albatross Beamer theme
-\colorlet{beamerbgcolor}{blue!50!black}
-\definecolor{shadecolor}{named}{beamerbgcolor}
+%\colorlet{beamerbgcolor}{white!40!black}
+\definecolor{shadecolor}{named}{mydarkgray}
 %\definecolor{shadecolor}{RGB}{248,248,248} % old
 
 \definecolor{numbercolor}{rgb}{1.0, 0.75, 0.0}
