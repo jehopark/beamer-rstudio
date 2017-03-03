@@ -19,6 +19,8 @@
   \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 \fi
 \usecolortheme{albatross}
+%\definecolor{mycolortheme}{RGB}{0,0,0}
+%\usecolortheme[named=mycolortheme]{structure}
 % use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 % use microtype if available
@@ -27,6 +29,9 @@
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
 \newif\ifbibliography
+
+\definecolor{mydarkgray}{RGB}{64, 64, 64}
+\setbeamercolor{background canvas}{bg=mydarkgray}
 
 %% highlighting-macros %%
 \usepackage{color} 
@@ -38,8 +43,8 @@
 \usepackage{framed}
 
 % change shadecolor to match with albatross Beamer theme
-\colorlet{beamerbgcolor}{blue!50!black}
-\definecolor{shadecolor}{named}{beamerbgcolor}
+%\colorlet{beamerbgcolor}{white!40!black}
+\definecolor{shadecolor}{named}{mydarkgray}
 %\definecolor{shadecolor}{RGB}{248,248,248} % old
 
 \definecolor{numbercolor}{rgb}{1.0, 0.75, 0.0}
