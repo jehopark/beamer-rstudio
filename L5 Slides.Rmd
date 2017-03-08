@@ -1,0 +1,418 @@
+---
+title: "Lecture 5"
+author: "The Great Courses"
+output: 
+  beamer_presentation: 
+    keep_tex: yes
+    colortheme: "albatross"
+    pandoc_args: [ 
+      "--template", "./beamer_template.tex"
+    ]
+---
+```{r setup, echo=FALSE, include=FALSE}
+knitr::knit_hooks$set(mysize = function(before, options, envir) {
+  if (before) 
+    return(options$size)
+})
+knitr::opts_chunk$set(mysize=TRUE)
+knitr::opts_chunk$set(size='\\normalsize')
+knitr::opts_chunk$set(fig.height=3)
+knitr::opts_chunk$set(fig.width=4)
+knitr::opts_chunk$set(echo=TRUE)
+knitr::opts_chunk$set(fig.align='center')
+knitr::opts_chunk$set(comment="")
+
+# use of knit_hooks$set for par option to be applied to all the chunks
+knitr::knit_hooks$set(mylightplot = function(before, options, envir) {
+    if (before) 
+      par(col="gray",      # color of lines
+          col.axis="gray", # color of axis annotation
+          col.lab="gray",  # color of x and y labels
+          col.main="gray", # color of the main title
+          col.sub="gray",  # color of the subtitles
+          col.ticks="gray",# color of tick marks
+          fg="lightgray")  # color of axes, boxes
+})
+knitr::opts_chunk$set(mylightplot=TRUE)
+```
+
+## Normal Is the Most Commonly Used Distribution in Statistics
+
+- Central Limit Theorem (loosely speaking): sums of things tend to be normally distributed.
+
+- And many discrete distributions can be APPROXIMATED with the normal:
+
+
+## The Normal Distribution
+
+-- A continuous random variable $X$ is said to have a *normal distribution with mean $\mu$ and standard deviation $\sigma$ (equivalently, variance $\sigma^2$)*, denoted $X\sim  N(\mu, \sigma)$), if the probability density function (PDF) of $X$ is 
+$$f_X(x) = \frac{1}{\sigma \sqrt{2\pi}}e^{\frac{-(x-\mu)^2}{2\sigma^2}}, -\infty < x < \infty$$p
+
+\vfill
+
+## The Normal Distribution
+
+-- A continuous random variable $X$ is said to have a *normal distribution with mean $\mu$ and standard deviation $\sigma$ (equivalently, variance $\sigma^2$)*, denoted $X\sim  N(\mu, \sigma)$), if the probability density function (PDF) of $X$ is 
+$$f_X(x) = \frac{1}{\sigma \sqrt{2\pi}}e^{\frac{-(x-\mu)^2}{2\sigma^2}}, -\infty < x < \infty$$
+
+- When $\mu = 0$ and $\sigma = 1$ the resulting distribution is called **the standard normal distribution**
+
+- Standard normal RVs are often labeled $Z$
+
+- Where does this PDF come from?  It has nice mathematical properties, including a property that implies it arises commonly in nature. (More next time!)
+
+## The Normal Distribution
+```{r, echo=FALSE,fig.align='center',out.width='100%'}
+density <- dnorm(x=seq(from=-3.5, to=3.5, by=0.1), mean=0, sd=1)
+plot(seq(from=-3.5, to=3.5, by=0.1), density, col="white", type="l", ylim=c(0, 0.5), lwd=4, xlab="Z~N(0,1)")
+  text(0, 0, "mu=0", col="white")
+  lines(c(0,0), c(0,dnorm(0,mean=0, sd=1)), col="white", lwd=1, lty=2)
+  arrows(x0=2,x1=1, y0=dnorm(1, mean=0, sd=1),y1=dnorm(1, mean=0, sd=1), col="blue", lwd=1,code = 2)
+  text(2, dnorm(1, mean=0, sd=1)+0.02, "Point of", col="blue")
+  text(2, dnorm(1, mean=0, sd=1)-0.02, "inflection", col="blue")
+  arrows(x0=-2,x1=-1, y0=dnorm(-1, mean=0, sd=1),y1=dnorm(-1, mean=0, sd=1), col="blue", lwd=1,code = 2)
+  text(-2, dnorm(-1, mean=0, sd=1)+0.02, "Point of", col="blue")
+  text(-2, dnorm(-1, mean=0, sd=1)-0.02, "inflection", col="blue")
+  lines(c(1,1), c(0,dnorm(1,mean=0, sd=1)), col="blue", lwd=1, lty=2)
+  lines(c(-1,-1), c(0,dnorm(-1,mean=0, sd=1)), col="blue", lwd=1, lty=2)
+```
+
+## Standardizing
+
+-- Every normal random variable can be transformed into a standard normal random variable ("standardized") by subtracting its mean, $\mu$, and dividing by its standard deviation, $\sigma$.  
+
+- That is, if $X \sim   \mbox{N}(\mu,\sigma^2)$ then 
+$$\mbox{If } Z =\frac{X -\mu}{\sigma}, \mbox{ then }  Z\sim   N(0, 1)$$ 
+
+
+- $Z$ represents the number of standard deviations above (if positive) or below (if negative) the mean our random variable $X$ has fallen.
+
+- If $Z$ is standard normal $$X = \mu + \sigma Z \sim   \mbox{N}(\mu, \sigma^2)$$
+
+
+
+
+## Pictures of the Normal Distribution
+
+-- This gives us a family of distributions with the same general shape:
+
+- Symmetric about the mean, $\mu$ (i.e. median = mean)
+
+- The area under each curve equals 1 because it is a PDF.
+
+- "Bell-shaped":  Data are concentrated in the center. The spread (and consequently height) is dictated by the standard deviation, $\sigma$.
+
+
+## Example
+
+Let's see how the shape of the normal density function changes as we vary $\mu$ and $\sigma$.
+
+```{r, results='hide', eval=FALSE, echo=TRUE}
+library(manipulate)
+myNormal <- function(mu, sdev) {
+  min_mu <- -5
+  max_mu <-  10
+  min_sd <- 1
+  max_sd <- 5
+  xlim_low <- min_mu - 3*max_sd
+  xlim_hi <- max_mu + 3*max_sd
+  density <- dnorm(x=seq(from=xlim_low, to=xlim_hi, by=0.1), mean=mu, sd=sdev)
+  plot(seq(from=xlim_low, to=xlim_hi, by=0.1), 
+       density, col="white", type="l", ylim=c(0, 0.5), xlab="X ~ N(mu, sdev)")
+}
+
+manipulate(myNormal(mu, sdev), mu=slider(-5, 10, step=0.1), 
+           sdev = slider(1, 5, step=0.1))
+```
+
+
+
+## Normal Is the Most Commonly Used Distribution in Statistics
+
+- Central Limit Theorem (loosely speaking): sums of things tend to be normally distributed 
+
+- Homework grades: Sums of scores on individual problems
+
+- Experimental measurements: Sums of steps each having its own error
+
+- Plinko: Sums of right or left bounces
+
+```{r, out.width='70%', echo=FALSE}
+library(png)
+library(grid)
+require(gridExtra)
+#pre_fig <- rasterGrob(readPNG("PlinkoPicture.png"), interpolate=TRUE)
+#post_fig <- rasterGrob(readPNG("plinko-prob.png"), interpolate=TRUE)
+#grid.arrange(pre_fig, post_fig, ncol=2)
+```
+
+## Cumulative Distribution Function
+
+-- Let $X\sim  N(\mu, \sigma)$.  $$P(X \leq a) = \int_{-\infty}^a \frac{1}{\sigma \sqrt{2\pi}}e^{\frac{-(x-\mu)^2}{2\sigma^2}} dx$$
+
+- There is no closed form for the CDF of the normal distribution.  We must compute it numerically.
+
+- If solving by hand: standardize and use a chart.
+
+- If using R:
+
+- `pnorm(a)` gives $P(Z \leq a)$ for $Z\sim  N(0,1)$
+  
+- `pnorm(a, mean=`$\mu$`, sd = `$\sigma$`)` gives $P(x \leq a)$ for $X\sim  N(\mu, \sigma)$
+  
+- `pnorm(a, mean=`$\mu$`, sd = `$\sigma$`, lower.tail=FALSE)` gives $P(x \geq a)$ for $X\sim  N(\mu, \sigma)$)
+  
+- `lower.tail = TRUE` means return the probability contained underneath the lower (left) tail, i.e. $P(X \leq a)$.  `lower.tail = FALSE` means return the probability contained in the upper tail, i.e. $P(X \geq a)$
+
+## Example: The normal pdf
+```{r, out.width='60%'}
+muX <- 0
+sigmaX <- 1
+## A sequence of x values
+xSeq <- seq(-6, 6, by=0.1)
+pdfX <- 1/(sigmaX*sqrt(2*pi)) * exp(-(xSeq-muX)^2/(2*sigmaX^2))
+## Plot the pdf
+plot(xSeq, pdfX, type="l", xlab="$x$", ylab="f(x)")
+```
+
+## Example: R functions for the normal distribution
+```{r}
+## Do it for a sequence of x values
+xSeq <- c(-3,-2,1,0,1,2,3)
+## The pdf
+dnorm(xSeq, mean=0, sd=1)
+## The cdf
+pnorm(xSeq, mean=0, sd=1)
+## The quantiles
+qnorm(c(0.01,0.025,0.05,0.5,0.95,0.975,0.99), mean=0, sd=1)
+```
+
+## Example: R functions for the normal distribution
+```{r}
+## Generate random normal distributed realizations
+rnorm(n=10, mean=0, sd=1)
+
+## Calculate the probability that the 
+## outcome of X is between a and b
+a <- 0.2
+b <- 0.8
+pnorm(b) - pnorm(a)
+```
+
+
+## Probabilities Associated with Standard Deviations
+
+```{r, echo=FALSE, out.width='75%'}
+density <- dnorm(x=seq(from=-3.5, to=3.5, by=0.1), mean=0, sd=1)
+plot(seq(from=-3.5, to=3.5, by=0.1), density, col="white", type="l", ylim=c(0, 0.5), lwd=4, xlab="Z ~ N(0,1)")
+cord.x <- c(-1,seq(-1,1,0.01),1) 
+cord.y <- c(0,dnorm(seq(-1,1,0.01)),0) 
+polygon(cord.x,cord.y,col='purple')
+  text(0, 0.27, "68%", col="white")
+  arrows(x0=-1,x1=1, y0=dnorm(-1, mean=0, sd=1),y1=dnorm(1, mean=0, sd=1), col="black", lwd=3,code = 3)
+```
+
+-- The prob. that a normal r.v. falls within $\pm 1$ std. dev. of its mean is approx. 68%.
+
+## Probabilities Associated with Standard Deviations
+
+```{r, echo=FALSE, out.width='75%'}
+density <- dnorm(x=seq(from=-3.5, to=3.5, by=0.1), mean=0, sd=1)
+plot(seq(from=-3.5, to=3.5, by=0.1), density, col="white", type="l", ylim=c(0, 0.5), lwd=4, xlab="Z ~ N(0,1)")
+cord.x <- c(-2,seq(-2,2,0.01),2) 
+cord.y <- c(0,dnorm(seq(-2,2,0.01)),0) 
+polygon(cord.x,cord.y,col='blue')
+  text(0, 0.08, "95%", col="white")
+  arrows(x0=-2,x1=2, y0=dnorm(-2, mean=0, sd=1),y1=dnorm(2, mean=0, sd=1), col="white", lwd=3,code = 3)
+```
+
+-- The prob. that a normal r.v. falls within $\pm 2$ std. dev. of its mean is approx. 95%.
+
+## Probabilities Associated with Standard Deviations
+
+```{r, echo=FALSE, out.width='75%'}
+density <- dnorm(x=seq(from=-3.5, to=3.5, by=0.1), mean=0, sd=1)
+plot(seq(from=-3.5, to=3.5, by=0.1), density, col="black", type="l", ylim=c(0, 0.5), lwd=4, xlab="Z ~ N(0,1)")
+cord.x <- c(-3,seq(-3,3,0.01),3) 
+cord.y <- c(0,dnorm(seq(-3,3,0.01)),0) 
+polygon(cord.x,cord.y,col='red')
+  text(0, 0.02, "99%", col="black")
+  arrows(x0=-3,x1=3, y0=dnorm(-3, mean=0, sd=1),y1=dnorm(3, mean=0, sd=1), col="black", lwd=3,code = 3)
+```
+
+-- The prob. that a normal r.v. falls within $\pm 3$ std. dev. of its mean is approx. 99%.
+
+## Probabilities Associated with Standard Deviations
+
+```{r, echo=FALSE, out.width='65%'}
+density <- dnorm(x=seq(from=-3.5, to=3.5, by=0.1), mean=0, sd=1)
+plot(seq(from=-3.5, to=3.5, by=0.1), density, col="black", type="l", ylim=c(0, 0.5), lwd=4, xlab="Z ~ N(0,1)")
+  lines(c(-3,-3), c(0,2*dnorm(-3, mean=0, sd=1)), col="red", lwd=2, lty=2)
+  lines(c(3,3), c(0,2*dnorm(3, mean=0, sd=1)), col="red", lwd=2, lty=2)
+  lines(c(-2,-2), c(0,dnorm(-2, mean=0, sd=1)), col="blue", lwd=2, lty=2)
+  lines(c(2,2), c(0,dnorm(2, mean=0, sd=1)), col="blue", lwd=2, lty=2)
+  lines(c(-1,-1), c(0,dnorm(-1, mean=0, sd=1)), col="purple", lwd=2, lty=2)
+  lines(c(1,1), c(0,dnorm(1, mean=0, sd=1)), col="purple", lwd=2, lty=2)
+  text(0, 0.27, "68%", col="purple")
+  text(0, 0.08, "95%", col="blue")
+  text(0, 0.02, "99%", col="red")
+  arrows(x0=-3,x1=3, y0=dnorm(-3, mean=0, sd=1),y1=dnorm(3, mean=0, sd=1), col="red", lwd=3, code = 3)
+  arrows(x0=-2,x1=2, y0=dnorm(-2, mean=0, sd=1),y1=dnorm(2, mean=0, sd=1), col="blue", lwd=3, code = 3)
+  arrows(x0=-1,x1=1, y0=dnorm(-1, mean=0, sd=1),y1=dnorm(1, mean=0, sd=1), col="purple", lwd=3, code = 3)
+```
+
+-- The prob. that a normal r.v. falls within $\pm 1$ std. dev. of its mean is approx. 68%.
+
+-- The prob. that a normal r.v. falls within $\pm 2$ std. dev. of its mean is approx. 95%.
+
+-- The prob. that a normal r.v. falls within $\pm 3$ std. dev. of its mean is approx. 99%.
+
+## Example
+
+Suppose $X\sim  N(13,4)$
+
+-- The probability that $X$ falls within $\pm 1$ standard deviation of its mean:
+
+- $P(\mu-\sigma \leq X \leq \mu+\sigma) = P(9 \leq X \leq 17)$
+
+- $= P(X \leq \mu+\sigma) - P(X \leq \mu-\sigma)= P(X \leq 17) - P(X \leq 9)$
+
+>- `pnorm(17, mean=13, sd=4) - pnorm(9, mean=13, sd=4)` = `r pnorm(17, mean=13, sd=4) - pnorm(9, mean=13, sd=4)`
+
+## Example
+
+Suppose $X\sim  N(13,4)$
+
+-- Or if we standardize (let $Z = \frac{X-\mu}{\sigma} \sim  N(0,1)$):
+
+- $P(X \leq 17) - P(X \leq 9)$
+
+- $= P(\frac{X-\mu}{\sigma} \leq \frac{17 - \mu}{\sigma}) - P(\frac{X-\mu}{\sigma} \leq \frac{9 - \mu}{\sigma})$
+
+- $=P(\frac{X-\mu}{\sigma} \leq \frac{17-13}{4}) - P(\frac{X-\mu}{\sigma} \leq \frac{9-13}{4})$
+
+- $= P(Z \leq 1) - P(Z \leq -1)$
+
+- ` pnorm(1, mean=0, sd=1) - pnorm(-1, mean=0, sd=1)` = `r pnorm(1, mean=0, sd=1) - pnorm(-1, mean=0, sd=1)`
+
+
+## Example
+Let's verify that the probability $X$ falls within $\pm 2$ standard deviations of the mean is roughly 95\%, and the probability it falls within $\pm 3$ standard deviations is roughly 99\%.
+
+
+
+
+## Other Properties
+
+Let $Z\sim N(0,1)$:
+
+-- $P(Z \geq a) = P(Z \leq -a)$
+
+-- Equivalently, $1-P(Z \leq a) = P(Z \leq -a)$
+
+```{r, echo=FALSE, out.width='80%'}
+curve(dnorm(x,0,1),xlim=c(-3.5,3.5),main='Normal Density')
+cord.x <- c(-3.5,seq(-3.5,-1.5,0.01),-1.5) 
+cord.y <- c(0,dnorm(seq(-3.5,-1.5,0.01)),0) 
+polygon(cord.x,cord.y,col='skyblue')
+cord.x <- c(1.5,seq(1.5,3.5,0.01),3.5) 
+cord.y <- c(0,dnorm(seq(1.5,3.5,0.01)),0) 
+polygon(cord.x,cord.y,col='skyblue')
+lines(c(-1.5,-1.5), c(0,dnorm(-1.5, mean=0, sd=1)), col="skyblue", lwd=3)
+  lines(c(1.5,1.5), c(0,dnorm(1.5, mean=0, sd=1)), col="skyblue", lwd=3)
+  text(-1.5, 0.007, "-a", col="blue", cex=2)
+  text(1.5, 0.007, "a", col="blue", cex=2)
+```
+
+
+
+## Percentiles
+
+We can also use R to find *percentiles* of the normal distribution. This is the value, $a$, such that a given percentage of $X$'s distribution lies below $a$.
+
+To find the 90th percentile of $X\sim N(10,5)$, we seek the value $a$ such that $P(X \leq a) = 0.90$.
+
+Option 1: Find this directly in R using the command `qnorm`:
+```{r}
+qx<-qnorm(0.90, mean=10, sd=5)
+qx
+```
+
+## Percentiles
+To find the 90th percentile of $X\sim N(10,5)$, we seek the value $a$ such that $P(X \leq a) = 0.90$.
+
+Option 2: Find the number of standard of deviations above (or below) the mean using a standard normal and convert back to $X$'s units:
+```{r}
+qz <- qnorm(0.90)
+qz
+```
+The 90th percentile is therefore `r qz`$\sigma + \mu$ = `r qz`$*5 + 10$:
+```{r, echo=FALSE}
+qz*5+10
+```
+
+
+
+## Percentiles of the standard normal 
+
+-- If the $q^{th}$ percentile of the standard normal distribution is the value $a$, what is the percentile of the value $-a$?
+
+- In general, if the $q^{th}$ percentile of standard normal distribution is the value $a$, then the percentile of $-a$ is $1-\frac{q}{100}$.
+
+-- We saw earlier that the 90th percentile of the standard normal is `r qz`.  What is the 10th percentile?
+
+- The 10th percentile is the value `r -qz`.
+
+## Example
+
+-- Assume that the number of daily ad clicks for a company  is (approximately) normally distributed with a mean of 1020 and a standard deviation of 50. 
+
+-- What's the probability of getting more than  1,160 clicks in a day?
+
+- It's not very likely.
+
+- 1,160 is `r (1160 - 1020) / 50` standard deviations from the mean
+
+```{r}
+pnorm(1160, mean = 1020, sd = 50, lower.tail = FALSE)
+pnorm(2.8, lower.tail = FALSE)
+```
+
+
+## Example
+
+-- Assume that the number of daily ad clicks for a company 
+is (approximately) normally distributed with a mean of 1020 and a standard
+deviation of 50. 
+
+-- What number of daily ad clicks would represent
+the value at which 75% of days have fewer clicks (assuming
+days are independent and identically distributed)?
+
+```{r}
+qnorm(0.75, mean = 1020, sd = 50)
+```
+
+
+## Summary of Key Concepts
+
+-- A continuous random variable $X$ is said to have a *normal distribution with mean $\mu$ and standard deviation $\sigma$* ($X\sim N(\mu, \sigma)$) if the probability density function (PDF) of $X$ is 
+$$f_X(x) = \frac{1}{\sigma \sqrt{2\pi}}e^{\frac{-(x-\mu)^2}{2\sigma^2}}, -\infty < x < \infty$$
+
+-- When $\mu = 0$ and $\sigma = 1$ the resulting distribution is called **the standard normal distribution**
+
+-- That is, if $X \sim  \mbox{N}(\mu,\sigma^2)$ then 
+$$Z = \frac{X -\mu}{\sigma} \sim  N(0, 1)$$ 
+
+
+## Summary of Key Concepts
+
+-- The normal distribution is symmetric and bell-shaped
+
+
+-- The probability that a normal random variable falls within $\pm 1$ standard deviation of its mean is approximately 68%.
+
+-- The probability that a normal random variable falls within $\pm 2$ standard deviations of its mean is approximately 95%.
+
+-- The probability that a normal random variable falls within $\pm 3$ standard deviations of its mean is approximately 99%.
+
